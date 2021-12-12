@@ -13,13 +13,14 @@ int genMoney() {
 	return rand() % 1500 + 800;
 }
 
+// Generate a side
 string genSide() {
 	int r = rand() % 2;
-
 	if (r == 0) return "T";
-	else return "CT";
+	return "CT";
 }
 
+// type - missinput was at start/end
 void incorrectInput(int input, int type) {
 	if (input != 1 && input != 2 && type == 1) {
 		cout << "Input the desired difficulty 1) Easy 2) Standard\n";
@@ -33,6 +34,7 @@ void incorrectInput(int input, int type) {
 	}
 }
 
+// lossBonus - [] amt 
 int rightAnswer(int lossBonus, int currentMoney, string side) {
 	int lossBonusActual = lossBonus * 500 + 1000;
 	if (side != "CT") {
@@ -56,16 +58,19 @@ int main() {
 	while (true) {
 		int money = genMoney(), bars = genBars(), playerAnswer;
 		string side = genSide();
-		cout << "Loss Reward: ";
-		for (int i = 0; i < bars; i++) {
-			cout << "[]";
-		}
-		if (difficulty == 1) cout << " - $" << bars * 500 + 1000;
-		cout <<  " Current Money : $" << money<< " Side: "<< side << "\n";
-		cout << "Should you buy? 1 (Yes) / 2 (No)\n";
-		cin >> playerAnswer;
-		incorrectInput(playerAnswer,2);
-		system("cls");
+
+			cout << "Loss Reward: ";
+				for (int i = 0; i < bars; i++) {
+					cout << "[]";
+				}
+
+			if (difficulty == 1) cout << " - $" << bars * 500 + 1000;
+				cout <<  " Current Money : $" << money<< " Side: "<< side << "\n";
+				cout << "Should you buy? 1 (Yes) / 2 (No)\n";
+					cin >> playerAnswer;
+						incorrectInput(playerAnswer,2);
+					system("cls");
+
 		if (playerAnswer != rightAnswer(bars, money, side)) cout << "Wrong!\n";
 		else  cout << "Pog!\n";
 		}
